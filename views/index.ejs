@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="https://unpkg.com/tablefilter@latest/dist/tablefilter/tablefilter.js"></script>
+  <script type="text/javascript" src="main.js" defer></script>
+  <title>Strava Filter Activities</title>
+</head>
+<body>
+  <table id="strava-filter-activities">
+    <thead>
+      <tr>
+        <th>Sport</th>
+        <th>Date</th>
+        <th>Title</th>
+        <th>Duration</th>
+        <th>Distance</th>
+        <th>Gear</th>
+        <th>Kudos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% activities.forEach((a) => { %>
+      <tr>
+        <td><%= a.type %></td>
+        <td><%= moment(a.start_date).format('YYYY-MM-DD HH:mm') %></td>
+        <td><a target="_blank" href="https://www.strava.com/activities/<%= a.id %>"><%= a.name %></a></td>
+        <td><%= moment.utc(a.moving_time * 1000).format("mm:ss") %></td>
+        <td><%= Math.floor(a.distance / 100) / 10 %> km</td>
+        <td><%= a.gear %></td>
+        <td><%= a.kudos_count %></td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</body>
+</html>
