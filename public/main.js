@@ -15,6 +15,7 @@ var filtersConfig = {
   },
   col_0: 'select',
   col_5: 'select',
+  col_6: 'select',
   col_types: [
     'string', 'date', 'string', 'date', 'number', 'string', 'number'
   ],
