@@ -26,7 +26,7 @@
         <td><%= a.type %></td>
         <td><%= moment(a.start_date).format('YYYY-MM-DD HH:mm') %></td>
         <td><a target="_blank" href="https://www.strava.com/activities/<%= a.id %>"><%= a.name %></a></td>
-        <td><%= moment.utc(a.moving_time * 1000).format("mm:ss") %></td>
+        <td><%= moment.utc(a.moving_time * 1000).format("HH:mm:ss") %></td>
         <td><%= Math.floor(a.distance / 100) / 10 %> km</td>
         <td><%= a.gear %></td>
         <td><%= a.kudos_count %></td>
