@@ -35,6 +35,12 @@ class API {
     })
   }
 
+  getDuplicates(cb) {
+    this.getAllActivities((activities) => {
+      cb(activities.filter((x) => activities.filter((y) => x.start_date === y.start_date).length > 1))
+    })
+  }
+
   getActivitiesWithGear(cb) {
     this.getGear((gear) => {
       this.getAllActivities((activities) => {
