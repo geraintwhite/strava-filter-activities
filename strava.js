@@ -24,7 +24,7 @@ class API {
 
   getAllActivities(cb, page=1) {
     console.log(`Getting page ${page}`)
-    request(`${url}/athlete/activities?per_page=100&page=${page}`, {auth: {bearer: this.auth}}, (err, res, body) => {
+    request(`${url}/athlete/activities?per_page=200&page=${page}`, {auth: {bearer: this.auth}}, (err, res, body) => {
       const activities = JSON.parse(body)
       console.log(`Got ${activities.length} activities on page ${page}`)
       if (activities.length === 0) {
@@ -39,6 +39,14 @@ class API {
     this.getAllActivities((activities) => {
       cb(activities.filter((x) => activities.filter((y) => x.start_date === y.start_date).length > 1))
     })
+  }
+
+  getDuplicatesToDelete(cb) {
+    this.getDuplicates((activities) => {
+      const grouped = groupBy(activities, (a) => a.start_date)
+      const duplicates = Object.keys(grouped).map((k) => grouped[k].sort((a, b) => a.start_date - b.start_date)[0])
+      cb(duplicates)
+    });
   }
 
   getActivitiesWithGear(cb) {
